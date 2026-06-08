@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 const gcd = (a, b) => b === 0n ? a : gcd(b, a % b);
-const lcm = (a, b) => (a * b) / gcd(a, b);
+const lcm = (a, b) => (a / gcd(a, b)) * b;
 
 const isNatural = (val) => {
     try {
