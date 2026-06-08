@@ -1,33 +1,30 @@
-const http = require('http')
-
-const server = http.createServer((req, res) => {
-    const parsed = new URL(req.url, 'http://localhost');
-    const xRaw = parsed.searchParams.get('x');
-    const yRaw = parsed.searchParams.get('y');
-    if(!isNatural(xRaw) || !isNatural(yRaw)){
-        res.end('NaN');
-    }
-    else{
-        const x = BigInt(xRaw);
-        const y = BigInt(yRaw);
-        res.end(String(lcm(x, y)))
-    }
-})
-
-server.listen(process.env.PORT || 3000, () => {
-    console.log('Server started')
-})
+const express = require('express')
+const app = express()
 
 const gcd = (a, b) => b === 0n ? a : gcd(b, a % b);
-
 const lcm = (a, b) => (a * b) / gcd(a, b);
 
 const isNatural = (val) => {
-    try{
+    try {
         const num = BigInt(val);
         return num > 0n;
-    }
-    catch(err){
+    } catch {
         return false;
     }
 }
+
+app.get('/serzhansrsnbv_gmail_com', (req, res) => {
+    const xRaw = req.query.x;
+    const yRaw = req.query.y;
+    if (!isNatural(xRaw) || !isNatural(yRaw)) {
+        res.send('NaN');
+    } else {
+        const x = BigInt(xRaw);
+        const y = BigInt(yRaw);
+        res.send(String(lcm(x, y)));
+    }
+})
+
+app.listen(process.env.PORT || 3000, () => {
+    console.log('Server started')
+})
