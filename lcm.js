@@ -5,7 +5,7 @@ const server = http.createServer((req, res) => {
     const parsed = new URL(req.url, 'http://localhost');
     let x = parsed.searchParams.get('x');
     let y = parsed.searchParams.get('y');
-    else if(!isNatural(x) || !isNatural(y)){
+    if(!isNatural(x) || !isNatural(y)){
         res.end('NaN');
     }
     else{
