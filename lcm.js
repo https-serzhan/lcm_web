@@ -5,16 +5,12 @@ const server = http.createServer((req, res) => {
     const parsed = new URL(req.url, 'http://localhost');
     let x = parsed.searchParams.get('x');
     let y = parsed.searchParams.get('y');
-    if (parsed.pathname !== '/serzhansrsnbv_gmail_com') {
-        res.end('404')
-    }
     else if(!isNatural(x) || !isNatural(y)){
         res.end('NaN');
     }
     else{
         x=BigInt(x);
         y=BigInt(y);
-        res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end(String(lcm(x,y)))
     }
 })
