@@ -14,6 +14,7 @@ const server = http.createServer((req, res) => {
     else{
         x=BigInt(x);
         y=BigInt(y);
+        res.writeHead(200, {'Content-Type': 'text/plain'});
         res.end(String(lcm(x,y)))
     }
 })
